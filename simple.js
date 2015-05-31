@@ -2,7 +2,7 @@
 {
     init: function(elevators, floors) {
         // first, extend objects with some handy functions
-        elevators.enqueueDestination = function(destination, direction) { // append to elevator having shortest queue
+        elevators.enqueueDestination = function(destination) { // append to elevator having shortest queue
             _.min(elevators, function(elevator) {return _.size(elevator.destinationQueue)}).appendDestination(destination);
         };
         _.each(elevators, function(elevator) {
@@ -45,10 +45,10 @@
         });
         _.each(floors, function(floor) {
             floor.on("up_button_pressed", function() {
-                elevators.enqueueDestination(floor.floorNum(), "up");
+                elevators.enqueueDestination(floor.floorNum());
             });
             floor.on("down_button_pressed", function() {
-                elevators.enqueueDestination(floor.floorNum(), "down");
+                elevators.enqueueDestination(floor.floorNum());
             });
         });
     },
